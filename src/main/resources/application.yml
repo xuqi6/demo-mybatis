@@ -1,0 +1,16 @@
+server:
+  port: 8088
+
+spring:
+  datasource:
+    username: sa
+    password: Cityray83917111
+    url: jdbc:sqlserver://106.53.0.192:1433;DatabaseName=crm
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+
+
+

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="webjars/jquery/jquery.js"></script>
+
+<button onclick="cc()"> ddd</button>
+</body>
+
+<script>
+
+    function cc(){
+        // $.ajax({
+        //     url : "http://127.0.0.1:8088/user/login",
+        //     type : "POST",
+        //     contentType : 'application/json;charset=UTF-8',
+        //     dataType : 'json',
+        //     data :JSON.stringify({"username":"11","password":"11"}),
+        //     success : function(data) {
+        //         alert("111");
+        //     }
+        // });
+
+        tempObj = {
+            username:"1",
+            password:"2",
+        }
+        $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1:8088/user/login",
+            data: JSON.stringify(tempObj),
+            contentType: "application/json",
+            dataType:"json",
+            success: function(data){
+                alert(data);
+            }
+        });
+    }
+
+</script>
+</html>
