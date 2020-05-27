@@ -68,7 +68,6 @@
 			<version>6.4.0.jre8</version>
 		</dependency>
 
-
 		<!-- mvn install:install-file -Dfile=D:\\sqljdbc4.jar -Dpackaging=jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc4 -Dversion=4.0 -->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>

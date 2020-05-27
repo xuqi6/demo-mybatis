@@ -56,14 +56,27 @@ public class DBInfoServiceImpl implements DBInfoService {
                 if(null != map & map.size()>0){
                     //登录成功
                     DBInfo dbInfo = new DBInfo();
-                    dbInfo.setId(Integer.valueOf(map.get("server_id").toString()));
-                    dbInfo.setServiceName(map.get("serv_name").toString());
-                    dbInfo.setUrl(map.get("db_url").toString());
-                    dbInfo.setPort(map.get("db_port").toString());
-                    dbInfo.setDbName(map.get("db_name").toString());
-                    dbInfo.setDbUser(map.get("db_user").toString());
-                    dbInfo.setDbPassword(map.get("db_password").toString());
-
+                    if(null!=map.get("server_id")){
+                        dbInfo.setId(Integer.valueOf(map.get("server_id").toString()));
+                    }
+                    if(null!=map.get("serv_name")){
+                        dbInfo.setServiceName(map.get("serv_name").toString());
+                    }
+                    if(null!=map.get("db_url")){
+                        dbInfo.setUrl(map.get("db_url").toString());
+                    }
+                    if(null!=map.get("db_port")){
+                        dbInfo.setPort(map.get("db_port").toString());
+                    }
+                    if(null!=map.get("db_name")){
+                        dbInfo.setDbName(map.get("db_name").toString());
+                    }
+                    if(null!=map.get("db_user")){
+                        dbInfo.setDbUser(map.get("db_user").toString());
+                    }
+                    if(null!=map.get("db_password")){
+                        dbInfo.setDbPassword(map.get("db_password").toString());
+                    }
                     if(null!=map.get("patch_id")){
                         dbInfo.setPatchId(map.get("patch_id").toString());
                     }
@@ -71,7 +84,6 @@ public class DBInfoServiceImpl implements DBInfoService {
                         dbInfo.setPatchName(map.get("patch_name").toString());
                     }
                     dbInfos.add(dbInfo);
-
                 }
             }
         }
@@ -86,8 +98,15 @@ public class DBInfoServiceImpl implements DBInfoService {
             public CallableStatement createCallableStatement(Connection con) throws SQLException {
                 String storedProc = "{call sp_patch_server_save(?,?,?,?,?,?,?,?)}";
                 CallableStatement cs = con.prepareCall(storedProc);
-                cs.setInt("@user_id", 0);
-                cs.setInt("@server_id", 0);
+                if(dbInfo.getId()!=null){
+                    //修改
+                    cs.setInt("@user_id", 1);
+                    cs.setInt("@server_id", dbInfo.getId());
+                }else{
+                    //新增
+                    cs.setInt("@user_id", 0);
+                    cs.setInt("@server_id", 0);
+                }
                 cs.setString("@server_name", dbInfo.getServiceName());
                 cs.setString("@db_url", dbInfo.getUrl());
                 cs.setString("@db_name", dbInfo.getDbName());
